@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Design Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🏠 <span>Home Design Studio</span></div>
+    <nav class="mode-tabs" id="modeTabs">
+      <button class="tab active" data-mode="design">🎨 Design</button>
+      <button class="tab" data-mode="scene">🌍 Locations</button>
+    </nav>
+    <input id="houseName" class="house-name" type="text" maxlength="40"
+           placeholder="Name your home…" />
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <!-- ===== Design controls ===== -->
+      <div id="designPanel">
+        <section>
+          <h3>Structure</h3>
+          <div class="row">
+            <label>Stories</label>
+            <div class="seg" id="segStories">
+              <button data-val="1">1</button>
+              <button data-val="2" class="active">2</button>
+            </div>
+          </div>
+          <div class="row">
+            <label>Width</label>
+            <input type="range" id="inWidth" min="240" max="420" step="4" value="320" />
+          </div>
+          <div class="row">
+            <label>Roof</label>
+            <div class="seg" id="segRoof">
+              <button data-val="gable" class="active">Gable</button>
+              <button data-val="hip">Hip</button>
+              <button data-val="flat">Flat</button>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Colors</h3>
+          <div class="row"><label>Walls</label><input type="color" id="cWall" value="#f2ead7" /></div>
+          <div class="row"><label>Roof</label><input type="color" id="cRoof" value="#7c4a35" /></div>
+          <div class="row"><label>Trim</label><input type="color" id="cTrim" value="#ffffff" /></div>
+          <div class="row"><label>Door</label><input type="color" id="cDoor" value="#8c2f2f" /></div>
+          <div class="palettes" id="palettes"></div>
+        </section>
+
+        <section>
+          <h3>Features</h3>
+          <label class="check"><input type="checkbox" id="fGarage" /> Garage</label>
+          <label class="check"><input type="checkbox" id="fPorch" checked /> Porch</label>
+          <label class="check"><input type="checkbox" id="fChimney" checked /> Chimney</label>
+        </section>
+
+        <section>
+          <h3>Windows</h3>
+          <div class="btn-row">
+            <button class="btn" id="btnAddWindow">＋ Add window</button>
+            <button class="btn" id="btnRemoveWindow">Remove selected</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== Location controls ===== -->
+      <div id="scenePanel" hidden>
+        <section>
+          <h3>Choose a location</h3>
+          <div class="scene-grid" id="sceneGrid"></div>
+        </section>
+      </div>
+
+      <section class="actions">
+        <div class="btn-row">
+          <button class="btn" id="btnRandom">🎲 Randomize</button>
+          <button class="btn" id="btnReset">Reset</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn primary" id="btnSave">💾 Save design</button>
+          <button class="btn" id="btnDownload">⬇ PNG</button>
+        </div>
+        <p class="toast" id="toast"></p>
+      </section>
+    </aside>
+
+    <main class="stage">
+      <canvas id="view" width="960" height="560"></canvas>
+      <p class="hint" id="hint"></p>
+    </main>
+  </div>
+
+  <script src="js/house.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

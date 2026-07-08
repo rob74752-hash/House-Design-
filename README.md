@@ -1,8 +1,9 @@
 # 🏠 Home Design Studio
 
-Design your own home in the browser, then place it in different locations —
-by a lake, up in the mountains, on the beach, deep in a forest, on a city
-street at dusk, or under a snowy night sky.
+Mock up a real home in the browser: draw the floor plan room by room,
+furnish every space, style the exterior with real materials, and then
+see your home in different locations — by a lake, in the mountains, on
+the beach, in a forest, on a city street, or under a snowy night sky.
 
 No build step, no dependencies — plain HTML, CSS, and JavaScript on a canvas.
 
@@ -16,22 +17,42 @@ npx serve .
 python3 -m http.server 8000
 ```
 
-then visit the printed URL.
+## 📐 Floor Plan mode
 
-## Design mode 🎨
+A real plan editor with measurements in feet:
 
-- **Structure** — 1 or 2 stories, adjustable width, and gable / hip / flat roofs.
-- **Colors** — pick wall, roof, trim, and door colors, or apply a preset palette
-  (Classic, Coastal, Modern, Meadow).
-- **Features** — toggle a garage, porch, and chimney.
-- **Windows & door** — add windows and drag them anywhere on the facade; drag
-  the door along the ground floor; double-click the door to make it arched;
-  select a window and press Delete to remove it.
-- **Randomize** — roll a whole new house when you want inspiration.
+- **Rooms** — drag to draw rooms with proper wall thickness; resize with
+  corner handles, move them (furniture inside comes along), and double-tap
+  to rename. Every room shows its dimensions and square footage, and the
+  sidebar totals the whole home.
+- **Walls, doors, windows** — draw interior partition walls; doors (with
+  swing arcs) and windows snap onto any wall and slide along it.
+- **Furniture** — a catalog of 25+ pieces across Living, Kitchen, Bedroom,
+  Bathroom, and Utility: beds, sofas, dining sets, counters, island, stove,
+  fridge, tub, shower, vanity, stairs, and more — all drawn like real
+  architectural plan symbols. Tap to place, drag to move, rotate, duplicate.
+- **Floors** — up to three floors, each with its own plan.
+- **Zoom / pan / fit** — navigate large plans comfortably.
 
-## Locations mode 🌍
+It opens with a furnished ~1,700 ft² two-story example home you can edit
+or clear and start fresh.
 
-Pick a scene and drag to place your home in it:
+## 🏡 Exterior mode
+
+A detailed front elevation with pseudo-3D depth:
+
+- Materials with real texture: lap siding, brick, stucco, board & batten
+- 1–3 stories, adjustable width, gable / hip / flat roofs with shingles
+- Divided-lite windows with trim, sills, and optional shutters — drag them
+  anywhere on the facade
+- Porch with columns, paneled or arched front door, wall lantern, garage
+  with paneled roll-up door, brick chimney
+- Color pickers plus five curated exterior styles (Farmhouse, Colonial,
+  Brick, Coastal, Desert)
+
+## 🌍 Locations mode
+
+Drag your home into any of six scenes:
 
 | Scene | Details |
 | --- | --- |
@@ -44,7 +65,6 @@ Pick a scene and drag to place your home in it:
 
 ## Extras
 
-- Designs auto-save to your browser (localStorage), so your home is still
-  there when you come back.
-- Name your home — the name appears on a plaque in location views.
-- **⬇ PNG** downloads a snapshot of the current view.
+- Everything auto-saves to your browser (localStorage)
+- Name your home — it appears on a plaque in location views
+- **⬇ PNG** downloads a snapshot of the current view

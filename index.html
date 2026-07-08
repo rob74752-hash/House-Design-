@@ -10,7 +10,8 @@
   <header class="topbar">
     <div class="brand">🏠 <span>Home Design Studio</span></div>
     <nav class="mode-tabs" id="modeTabs">
-      <button class="tab active" data-mode="design">🎨 Design</button>
+      <button class="tab active" data-mode="plan">📐 Floor Plan</button>
+      <button class="tab" data-mode="exterior">🏡 Exterior</button>
       <button class="tab" data-mode="scene">🌍 Locations</button>
     </nav>
     <input id="houseName" class="house-name" type="text" maxlength="40"
@@ -19,8 +20,55 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <!-- ===== Design controls ===== -->
-      <div id="designPanel">
+      <!-- ===== Floor plan controls ===== -->
+      <div id="planPanel">
+        <section>
+          <h3>Floor</h3>
+          <div class="seg wrap" id="segFloors"></div>
+          <div class="btn-row">
+            <button class="btn" id="btnAddFloor">＋ Floor</button>
+            <button class="btn" id="btnRemoveFloor">Remove floor</button>
+          </div>
+          <p class="stat" id="areaStat"></p>
+        </section>
+
+        <section>
+          <h3>Tools</h3>
+          <div class="tool-grid" id="toolGrid">
+            <button class="tool active" data-tool="select">🖐 Select</button>
+            <button class="tool" data-tool="room">▢ Room</button>
+            <button class="tool" data-tool="wall">▬ Wall</button>
+            <button class="tool" data-tool="door">🚪 Door</button>
+            <button class="tool" data-tool="window">🪟 Window</button>
+            <button class="tool" data-tool="erase">🧹 Erase</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btnRotate">⟳ Rotate</button>
+            <button class="btn" id="btnDuplicate">⧉ Copy</button>
+            <button class="btn danger" id="btnDelete">✕ Delete</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btnZoomOut">－ Zoom</button>
+            <button class="btn" id="btnZoomIn">＋ Zoom</button>
+            <button class="btn" id="btnFit">⤢ Fit</button>
+          </div>
+        </section>
+
+        <section>
+          <h3>Furniture</h3>
+          <div class="seg wrap" id="catTabs"></div>
+          <div class="catalog" id="catalog"></div>
+        </section>
+
+        <section>
+          <div class="btn-row">
+            <button class="btn" id="btnClearFloor">Clear this floor</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== Exterior controls ===== -->
+      <div id="extPanel" hidden>
         <section>
           <h3>Structure</h3>
           <div class="row">
@@ -28,11 +76,12 @@
             <div class="seg" id="segStories">
               <button data-val="1">1</button>
               <button data-val="2" class="active">2</button>
+              <button data-val="3">3</button>
             </div>
           </div>
           <div class="row">
             <label>Width</label>
-            <input type="range" id="inWidth" min="240" max="420" step="4" value="320" />
+            <input type="range" id="inWidth" min="260" max="460" step="4" value="340" />
           </div>
           <div class="row">
             <label>Roof</label>
@@ -42,14 +91,23 @@
               <button data-val="flat">Flat</button>
             </div>
           </div>
+          <div class="row">
+            <label>Material</label>
+            <div class="seg" id="segMaterial">
+              <button data-val="siding" class="active">Siding</button>
+              <button data-val="brick">Brick</button>
+              <button data-val="stucco">Stucco</button>
+              <button data-val="board">Board</button>
+            </div>
+          </div>
         </section>
 
         <section>
           <h3>Colors</h3>
-          <div class="row"><label>Walls</label><input type="color" id="cWall" value="#f2ead7" /></div>
-          <div class="row"><label>Roof</label><input type="color" id="cRoof" value="#7c4a35" /></div>
-          <div class="row"><label>Trim</label><input type="color" id="cTrim" value="#ffffff" /></div>
-          <div class="row"><label>Door</label><input type="color" id="cDoor" value="#8c2f2f" /></div>
+          <div class="row"><label>Walls</label><input type="color" id="cWall" value="#e8e2d2" /></div>
+          <div class="row"><label>Roof</label><input type="color" id="cRoof" value="#5c5650" /></div>
+          <div class="row"><label>Trim</label><input type="color" id="cTrim" value="#faf8f2" /></div>
+          <div class="row"><label>Door</label><input type="color" id="cDoor" value="#48505e" /></div>
           <div class="palettes" id="palettes"></div>
         </section>
 
@@ -58,6 +116,7 @@
           <label class="check"><input type="checkbox" id="fGarage" /> Garage</label>
           <label class="check"><input type="checkbox" id="fPorch" checked /> Porch</label>
           <label class="check"><input type="checkbox" id="fChimney" checked /> Chimney</label>
+          <label class="check"><input type="checkbox" id="fShutters" checked /> Window shutters</label>
         </section>
 
         <section>
@@ -65,6 +124,12 @@
           <div class="btn-row">
             <button class="btn" id="btnAddWindow">＋ Add window</button>
             <button class="btn" id="btnRemoveWindow">Remove selected</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btnRegenWindows">Auto-arrange windows</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btnRandom">🎲 Randomize exterior</button>
           </div>
         </section>
       </div>
@@ -79,24 +144,24 @@
 
       <section class="actions">
         <div class="btn-row">
-          <button class="btn" id="btnRandom">🎲 Randomize</button>
-          <button class="btn" id="btnReset">Reset</button>
-        </div>
-        <div class="btn-row">
-          <button class="btn primary" id="btnSave">💾 Save design</button>
+          <button class="btn primary" id="btnSave">💾 Save</button>
           <button class="btn" id="btnDownload">⬇ PNG</button>
+          <button class="btn" id="btnReset">Reset</button>
         </div>
         <p class="toast" id="toast"></p>
       </section>
     </aside>
 
     <main class="stage">
-      <canvas id="view" width="960" height="560"></canvas>
+      <canvas id="view" width="1200" height="680"></canvas>
       <p class="hint" id="hint"></p>
     </main>
   </div>
 
-  <script src="js/house.js"></script>
+  <script src="js/exterior.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/furniture.js"></script>
+  <script src="js/floorplan.js"></script>
   <script src="js/scenes.js"></script>
   <script src="js/app.js"></script>
 </body>

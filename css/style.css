@@ -1,0 +1,211 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f2f0ea;
+  --panel: #ffffff;
+  --ink: #2b2b33;
+  --muted: #7c7c88;
+  --line: #e3e0d6;
+  --accent: #2f6f4f;
+  --accent-ink: #ffffff;
+}
+
+body {
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mode-tabs { display: flex; gap: 6px; }
+
+.tab {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.house-name {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 220px;
+  background: var(--bg);
+}
+
+/* ---------- Layout ---------- */
+.layout {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar section { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.sidebar section:last-child { border-bottom: none; }
+
+.sidebar h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.row label { font-size: 14px; }
+.row input[type="range"] { flex: 1; max-width: 150px; }
+
+.row input[type="color"] {
+  width: 44px;
+  height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px;
+  background: var(--panel);
+  cursor: pointer;
+}
+
+/* Segmented controls */
+.seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+
+.seg button {
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button.active { background: var(--accent); color: var(--accent-ink); }
+
+.check { display: block; font-size: 14px; padding: 5px 0; cursor: pointer; }
+.check input { margin-right: 8px; }
+
+/* Palette presets */
+.palettes { display: flex; gap: 8px; margin-top: 4px; }
+
+.palette {
+  flex: 1;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+}
+
+.palette span { flex: 1; }
+
+/* Scene picker */
+.scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.scene-chip {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 12px 6px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--ink);
+}
+
+.scene-chip .emoji { display: block; font-size: 22px; margin-bottom: 4px; }
+.scene-chip.active { border-color: var(--accent); background: #e8f2ec; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 8px; margin-bottom: 8px; }
+
+.btn {
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 9px 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+.toast { font-size: 12px; color: var(--accent); min-height: 16px; text-align: center; }
+
+/* Stage */
+.stage { flex: 1; min-width: 0; }
+
+#view {
+  width: 100%;
+  max-width: 1100px;
+  display: block;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: default;
+  touch-action: none;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .house-name { width: 140px; }
+}
